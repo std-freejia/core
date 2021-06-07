@@ -28,6 +28,7 @@ public class OrderServiceImpl implements OrderService{
     private DiscountPolicy discountPolicy;
 
     // 생성자를 이용 : 생성자는 DiscountPolicy 로써 FixDiscountPolicy가 들어올지, RateDiscountPolicy가 들어올지 몰라도 된다!
+    // 어떤 구현 객체를 주입할 지는 AppConfig가 결정한다.
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
