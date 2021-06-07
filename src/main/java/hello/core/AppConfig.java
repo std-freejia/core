@@ -2,6 +2,7 @@ package hello.core;
 
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
+import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
@@ -21,7 +22,7 @@ import hello.core.order.OrderServiceImpl;
  * 생성자를 통해 구현체를 선택할 수 있도록 한다!
  * DIP의 완성 : MemberServiceImpl은 MemberRepository인 추상에만 의존하면 된다. 구체 클래스를 몰라도 된다!
  */
-public class AppConfig { // 공연 기획자의 역할을 한다.
+public class AppConfig { // 공연 기획자의 역할을 한다. -> 공연 참여자인 구현 객체들을 모두 알아야 한다. 
 
     public MemberService memberService(){ // 객체의 생성과 연결을 모두 담당한다.
 
@@ -37,8 +38,9 @@ public class AppConfig { // 공연 기획자의 역할을 한다.
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
-    public DiscountPolicy discountPolicy(){
-        return new FixDiscountPolicy();  // 구체 클래스 생성 -> '구체 클래스 선택'과 '의존관계 주입'을 구분했다.  
+    public DiscountPolicy discountPolicy(){ // 구체 클래스 생성 -> '구체 클래스 선택'과 '의존관계 주입'을 구분했다.
+        //return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
     }
 
 }
